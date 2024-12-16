@@ -1,0 +1,138 @@
+.topheader {
+  box-shadow: 0 4px 5px var(--navbar-shadow-color);
+  position: fixed; /* fija la barra*/
+  background-color: var(--theme-color);
+  left: 0; /* posición izquierda*/
+  top: 0; /* posición superior*/
+  width: 100%; /* ancho de la barra */
+  z-index: 100; /* permite que los elementos pasen por debajo de la barra*/
+}
+
+.topnav {
+  display: flex; /*pone los elementos uno al lado del otro */
+  justify-content: space-between; /* pone los elementos pegados a los bordes */
+  padding: 10px; /* espacio entre el borde y el contenido */
+  max-width: 980px; /* ancho maximo */
+  margin: 0 auto; /* centro el elemento */
+}
+
+/* Logo */
+.logo {
+  display: flex; /* pone los elementos uno al lado del otro */
+  align-items: center; /* pone los elementos en el centro */
+  font-size: 18px;
+  font-weight: 500; /* pone el texto en negrita */
+  color: var(--primary-color);
+}
+
+.logo img {
+  border-radius: 50%; /*vuelve la imagen redonda*/
+}
+
+/*Menu*/
+.menu {
+  display: flex;
+  list-style: none; /*elimina los puntos de los li*/
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 0 15px; /* pone un espacio entre los elementos*/
+}
+
+.menu a {
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 50px; /*centra el texto horizontalmente*/
+  text-transform: uppercase; /* pone el texto en mayusculas*/
+  position: relative; /* pone el texto en posición relativa*/
+}
+
+.menu a::after{
+  content: ""; /* crea un pseudo elemento sin el no se ve nada*/
+  background-color: var(--secondary-color);
+  position: absolute; /* pone el texto en posición absoluta*/
+  left: 0;
+  top: calc(100% + 4px);
+  width:100%;
+  height: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.menu a.selected::after,
+.menu a:hover::after{
+  opacity: 0.8;
+}
+
+.menu a:hover{
+  color: var(--primary-color);
+}
+
+.open-menu,
+.close-menu {
+  display: none; /* no se muestra por defecto */
+}
+
+@media (max-width: 950px) {
+  /*Menu*/
+  .menu {
+    flex-direction: column; /* pone los elementos uno al lado del otro en columna*/
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    background-color: var(--menu-mobile-background-color);
+    color: var(--text-color-inverse);
+    height: 100%; /* ocupa todo el alto de la pantalla */
+    overflow-y: auto; /* permite desplazarse verticalmente */
+    opacity: 0; /* pone opaco los elementos*/
+    pointer-events: none; /* no se pueden hacer clics sobre los elementos*/
+    transition: opacity 0.3s;
+  }
+
+  .menu li {
+    padding: 0; /* pone un espacio entre los elementos*/
+  }
+
+  .menu a {
+    color: var(--text-color-inverse);
+    line-height: 70px; /*centra el texto horizontalmente*/
+    font-size: 25px;
+  }
+
+  .open-menu,
+  .close-menu {
+    display: block; /* se muestra por defecto en dispositivos móviles */
+    border: none; /* elimina el borde */
+    background: none; /* elimina el fondo */
+    cursor: pointer;
+  }
+
+  .close-menu{
+    align-self: flex-end; /* se alinea al final de la fila este unico elemento */
+    padding: 10px 8px;
+  }
+
+  .menu_opened{
+    opacity: 1;
+    pointer-events: all; /* permite hacer clics sobre los elementos */
+  }
+
+  .open-menu:focus:not(:focus-visible),
+  .close-menu:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .menu a::after{
+    content: none; /* crea un pseudo elemento sin el no se ve nada*/
+  }
+  
+  .menu a:hover,
+  .menu a.selected{
+    color: var(--secondary-color);
+  }
+}
